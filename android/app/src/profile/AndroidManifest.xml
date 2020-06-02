@@ -4,4 +4,30 @@
          to allow setting breakpoints, to provide hot reload, etc.
     -->
     <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+   <application
+    android:name="flutter.app.DemoApp"
+    android:label="testApp"
+    android:icon="@mipmap/ic_launcher">
+    <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBs0Q-iPXGpEQoHouEVSyBZR-7_xU9NCuw"/> 
+    <activity
+        android:name=".MainActivity"
+        android:launchMode="singleTop"
+        android:theme="@style/LaunchTheme"
+        android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+        android:hardwareAccelerated="true"
+        android:windowSoftInputMode="adjustResize">
+        <meta-data
+            android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
+            android:value="true" />
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN"/>
+            <category android:name="android.intent.category.LAUNCHER"/>
+        </intent-filter>
+
+    </activity>
+</application>
 </manifest>
