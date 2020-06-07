@@ -20,31 +20,84 @@ class PlannerForm extends StatefulWidget {
   }
 }
 
+enum SingingCharacter { car, transit }
+
 class PlannerFormState extends State<PlannerForm> {
   final _formKey = GlobalKey<FormState>();
+  SingingCharacter _character = SingingCharacter.car;
+
 
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: 
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          TextFormField(
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
+          Container(
+            width: 400.0,
+            child: TextFormField(
+              decoration: InputDecoration(
+                labelText: "Point of departure",
+                fillColor: Colors.white,
+                border: new OutlineInputBorder(
+                  borderRadius: new BorderRadius.circular(25.0),
+                  borderSide: new BorderSide(),
+                )
+              ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
+            ),
           ),
-          TextFormField(
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
+          SizedBox(height: 20),
+          Container(
+            width: 400.0,
+            child: TextFormField(
+              decoration: InputDecoration(
+                labelText: "Destination",
+                fillColor: Colors.white,
+                border: new OutlineInputBorder(
+                  borderRadius: new BorderRadius.circular(25.0),
+                  borderSide: new BorderSide(),
+                )
+              ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
+            ),
+          ),
+          ListTile(
+            title: const Text('Car'),
+            leading: Radio(
+              value: SingingCharacter.car, 
+              groupValue: _character, 
+              onChanged: (SingingCharacter value) {
+                setState(() {
+                  _character = value;
+                });
+              },
+            ),
+          ),
+          ListTile(
+            title: const Text('Public Transport'),
+            leading: Radio(
+              value: SingingCharacter.transit, 
+              groupValue: _character, 
+              onChanged: (SingingCharacter value) {
+                setState(() {
+                  _character = value;
+                });
+              },
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
