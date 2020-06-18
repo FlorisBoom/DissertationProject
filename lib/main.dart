@@ -83,7 +83,7 @@ class MapState extends State<Map> {
           shape: CircleBorder(),
           padding: EdgeInsets.all(10),
           color: Colors.white,
-          onPressed: _centerCamera,
+          onPressed: () { _centerCamera(_controller); },
           child: Icon(Icons.center_focus_strong, color: Colors.black, size: 30),
         ),
       ),
@@ -140,14 +140,10 @@ Future<bool> checkForServiceAndPermission() async {
   return Future.value(true);
 } 
 
-_switchToPlanner() {
-
+Future<void> _centerCamera(Completer _controller) async {
+  final mapController = await _controller.future;
+  mapController.animateCamera(CameraUpdate.newCameraPosition(
+    CameraPosition(target: _initialPosition, zoom: 14)
+  ));
 }
 
-_centerCamera() {
-
-}
-
-_switchToWallet() {
-
-}

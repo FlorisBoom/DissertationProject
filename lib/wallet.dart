@@ -28,11 +28,21 @@ class WalletAmount extends StatefulWidget {
 
 class WalletAmountState extends State<WalletAmount> {
   int _money = 0;
+  String _latestBooking = "";
 
   @override
   void initState() {
     super.initState();
     _loadWallet();
+    _loadLatestBooking();
+  }
+
+  _loadLatestBooking() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _latestBooking = (prefs.getString('lastestBooking') ?? "");
+    });
+    print(_latestBooking);
   }
 
   _loadWallet() async {
@@ -40,7 +50,6 @@ class WalletAmountState extends State<WalletAmount> {
     setState(() {
       _money = (prefs.getInt('money') ?? 0);
     });
-    print('Initial money load = $_money');  
   }
 
   _updateWallet(topUpAmount) async {
@@ -95,6 +104,24 @@ class WalletAmountState extends State<WalletAmount> {
                 });
               },
             ),
+            Padding(
+              padding: EdgeInsets.only(top: 50),
+              child: Text("Lastest booking", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18))
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 30),
+              child: Card(
+                child: InkWell(
+                  splashColor: Colors.blue.withAlpha(30),
+                  child: Container(
+                    width: 300,
+                    height: 100,
+                    padding: EdgeInsets.all(30),
+                    child: Text('$_latestBooking'),
+                  ),
+                )
+              )
+            )
           ],
         ),
       ),

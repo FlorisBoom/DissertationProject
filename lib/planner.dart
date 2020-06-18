@@ -1,3 +1,4 @@
+import 'package:DissertationProject/results.dart';
 import 'package:flutter/material.dart';
 
 class Planner extends StatelessWidget {
@@ -18,11 +19,13 @@ class PlannerForm extends StatefulWidget {
   }
 }
 
-enum SingingCharacter { car, transit }
+enum RadioOptions { Car, Transit }
 
 class PlannerFormState extends State<PlannerForm> {
   final _formKey = GlobalKey<FormState>();
-  SingingCharacter _character = SingingCharacter.car;
+  final _departureController = TextEditingController(text: "Newcastle"); 
+  final _destinationController = TextEditingController(text: "London"); 
+  RadioOptions _radioOptions = RadioOptions.Car;
 
 
   @override
@@ -37,6 +40,7 @@ class PlannerFormState extends State<PlannerForm> {
           Container(
             width: 400.0,
             child: TextFormField(
+              controller: _departureController,
               decoration: InputDecoration(
                 labelText: "Point of departure",
                 fillColor: Colors.white,
@@ -57,6 +61,7 @@ class PlannerFormState extends State<PlannerForm> {
           Container(
             width: 400.0,
             child: TextFormField(
+              controller: _destinationController,
               decoration: InputDecoration(
                 labelText: "Destination",
                 fillColor: Colors.white,
@@ -76,11 +81,12 @@ class PlannerFormState extends State<PlannerForm> {
           ListTile(
             title: const Text('Car'),
             leading: Radio(
-              value: SingingCharacter.car, 
-              groupValue: _character, 
-              onChanged: (SingingCharacter value) {
+              value: RadioOptions.Car, 
+              groupValue: _radioOptions, 
+              onChanged: (RadioOptions value) {
+                print(value);
                 setState(() {
-                  _character = value;
+                  _radioOptions = value;
                 });
               },
             ),
@@ -88,11 +94,12 @@ class PlannerFormState extends State<PlannerForm> {
           ListTile(
             title: const Text('Public Transport'),
             leading: Radio(
-              value: SingingCharacter.transit, 
-              groupValue: _character, 
-              onChanged: (SingingCharacter value) {
+              value: RadioOptions.Transit, 
+              groupValue: _radioOptions, 
+              onChanged: (RadioOptions value) {
+                print(value);
                 setState(() {
-                  _character = value;
+                  _radioOptions = value;
                 });
               },
             ),
@@ -101,12 +108,12 @@ class PlannerFormState extends State<PlannerForm> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: RaisedButton(
               onPressed: () {
-                // Validate returns true if the form is valid, or false
-                // otherwise.
                 if (_formKey.currentState.validate()) {
                   // If the form is valid, display a Snackbar.
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('Processing Data')));
+                  Navigator.push(
+                    context, 
+                    MaterialPageRoute(builder: (context) => Results(transportSort: _radioOptions.toString()))
+                  );
                 }
               },
               child: Text('Submit'),
