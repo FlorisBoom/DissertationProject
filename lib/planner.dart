@@ -84,7 +84,6 @@ class PlannerFormState extends State<PlannerForm> {
               value: RadioOptions.Car, 
               groupValue: _radioOptions, 
               onChanged: (RadioOptions value) {
-                print(value);
                 setState(() {
                   _radioOptions = value;
                 });
@@ -97,7 +96,6 @@ class PlannerFormState extends State<PlannerForm> {
               value: RadioOptions.Transit, 
               groupValue: _radioOptions, 
               onChanged: (RadioOptions value) {
-                print(value);
                 setState(() {
                   _radioOptions = value;
                 });

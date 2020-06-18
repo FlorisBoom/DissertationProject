@@ -42,7 +42,6 @@ class WalletAmountState extends State<WalletAmount> {
     setState(() {
       _latestBooking = (prefs.getString('lastestBooking') ?? "");
     });
-    print(_latestBooking);
   }
 
   _loadWallet() async {

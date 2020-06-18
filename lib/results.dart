@@ -113,7 +113,6 @@ _book(BuildContext context, int price, String _bookingDetails) async {
   int _money;
   SharedPreferences prefs = await SharedPreferences.getInstance();
   _money = (prefs.getInt('money') ?? 0);
-  print(_money);
   if (price > _money) {
     return showDialog(
       context: context,
